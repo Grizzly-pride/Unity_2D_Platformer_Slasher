@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb5437c2e8766cf408bc2a12cd07984c, type: 3}
+  m_Name: PlayerData
+  m_EditorClassIdentifier: 
+  noFrictionMaterial: {fileID: 6200000, guid: 2ea3183e888e96b448da5f79daf6d94e, type: 2}
+  frictionMaterial: {fileID: 6200000, guid: 57921e6d345b3d649b4f3c2b8bfb1be4, type: 2}
+  runSpeed: 5
+  walckSpeed: 2
+  runningThreshold: 0.75
+  standColiderHeight: 1.38
+  crouchSpeed: 2
+  crouchColiderHeight: 0.84
+  jumpForce: 11
+  doubleJumpForce: 9
+  airMoveX: 5
+  thresholdHardLanding: -15
+  dashSpeed: 9
+  dashCoolDown: 0.5
+  dashTime: 0.35
