@@ -5,7 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
-  - Wall
+  - Grab_Wall
   layers:
   - Default
   - TransparentFX
@@ -15,7 +15,7 @@ TagManager:
   - UI
   - Player
   - 'Ground '
-  - Wall
+  - Grab_Wall
   - 
   - 
   - 
@@ -45,6 +45,9 @@ TagManager:
     locked: 0
   - name: Ground
     uniqueID: 646239603
+    locked: 0
+  - name: Grab_Wall
+    uniqueID: 2378649087
     locked: 0
   - name: Player
     uniqueID: 1651893771
