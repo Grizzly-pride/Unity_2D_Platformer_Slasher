@@ -22,6 +22,8 @@ public class Player : MonoBehaviour
     public PlayerDashState DashState { get; private set; }
     public PlayerDashToStandState DashToStandState { get; private set; }
     public PlayerDashToCrouchState DashToCrouchState { get; private set; }
+    public PlayerIdleOnWallState IdleOnWallState { get; private set; }  
+    public PlayerLandingOnWallState LandingOnWallState { get; private set; }
     #endregion
 
     #region Components
@@ -37,12 +39,13 @@ public class Player : MonoBehaviour
     #region Variables
     [SerializeField] private PlayerData data;
 
-    public Vector2 currentMotion;
+    public Vector2 CurrentPos { get; private set; }
+    public Vector2 LastPos { get; private set; }
+    public Vector2 CurrentMotion { get; private set; }
     public Vector2 vectorWorkSpace;
 
     public int FacingDirection { get; private set; }
     public bool wasCrouch;
-
 
     #endregion
 
@@ -68,6 +71,8 @@ public class Player : MonoBehaviour
         DashToStandState = new PlayerDashToStandState(this, StateMachine, data, "dashToStand");
         DashToCrouchState = new PlayerDashToCrouchState(this, StateMachine, data, "dashToCrouch");
         DashState = new PlayerDashState(this, StateMachine, data, "dash");
+        IdleOnWallState = new PlayerIdleOnWallState(this, StateMachine, data, "idleOnWall");
+        LandingOnWallState = new PlayerLandingOnWallState(this, StateMachine, data, "landingOnWall");
 
         //Sensors
         GroundSensor = transform.Find("GroundCheck").GetComponent<SensorSurface>();
@@ -88,6 +93,7 @@ public class Player : MonoBehaviour
         RoofSensor.detected = false;
         WallSensor.detected = false;    
         FacingDirection = 1;
+        wasCrouch = false;
 
         //Initialization State
         StateMachine.Initialize(StandIdleState);
@@ -96,16 +102,16 @@ public class Player : MonoBehaviour
     private void FixedUpdate()
     {
         StateMachine.CurrentState.PhysicsUpdate();
-
     }
 
     private void Update()
     {
-        currentMotion = RB.velocity;
-        StateMachine.CurrentState.LogicUpdate();
+        CurrentPos = transform.position;    
+        CurrentMotion = RB.velocity;
 
-        CheckIfWall();
-
+        StateMachine.CurrentState.LogicUpdate(); 
+        
+        LastPos = transform.position;
 
     }
     #endregion
@@ -116,37 +122,44 @@ public class Player : MonoBehaviour
     {
         if (slope)
         {
-            SetVelocitySlope(velocity, xDirect);
+            MovementOnSlope(velocity, xDirect);
             
         }
         else 
         {
-            SetVelocitySmooth(velocity, xDirect);
+            MovementOnSmooth(velocity, xDirect);
         }
 
     }
 
-    public void SetVelocitySlope(float velocity, int xDirect)
+    public void MovementOnSlope(float velocity, int xDirect)
     {
         vectorWorkSpace.Set(-xDirect * velocity * GroundSensor.slopeDirection.x, -xDirect * velocity * GroundSensor.slopeDirection.y);
         SetFinalVelocity();
     }
 
-    public void SetVelocitySmooth(float velocity, int xDirect)
+    public void MovementOnSmooth(float velocity, int xDirect)
     {
         vectorWorkSpace.Set(velocity * xDirect, Vector2.zero.x);
+        SetFinalVelocity();
+    }
+    
+    public void SetVelocity(float velocity, Vector2 angle, int xDirect)
+    {
+        angle.Normalize();
+        vectorWorkSpace.Set(angle.x * velocity * xDirect, angle.y * velocity);
         SetFinalVelocity();
     }
 
     public void SetVelocityX(float velocity)
     {
-        vectorWorkSpace.Set(velocity, currentMotion.y);
+        vectorWorkSpace.Set(velocity, CurrentMotion.y);
         SetFinalVelocity();
     }
 
     public void SetVelocityY(float velocity)
     {
-        vectorWorkSpace.Set(currentMotion.x, velocity);
+        vectorWorkSpace.Set(CurrentMotion.x, velocity);
         SetFinalVelocity();
     }
 
@@ -159,8 +172,9 @@ public class Player : MonoBehaviour
     public void SetFinalVelocity()
     {
         RB.velocity = vectorWorkSpace;
-        currentMotion = vectorWorkSpace;
+        CurrentMotion = vectorWorkSpace;
     }
+
 
     public void SetColliderHeight(float height)
     {

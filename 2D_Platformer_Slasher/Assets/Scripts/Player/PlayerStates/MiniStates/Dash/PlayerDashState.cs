@@ -5,14 +5,22 @@ using UnityEngine;
 public class PlayerDashState : PlayerGroundedState
 {
     private float lastDashTime;
+    private bool isRoof;
 
     public PlayerDashState(Player player, PlayerStateMachine stateMachine, PlayerData data, string animName) : base(player, stateMachine, data, animName)
     {
     }
 
+    public override void DoChecks()
+    {
+        base.DoChecks();
+        isRoof = player.CheckIfRoof();
+    }
+
     public override void Enter()
     {
         base.Enter();
+        player.InputController.UseDashInput();
         player.SetPhysicsMaterial(data.noFrictionMaterial);
         player.SetColliderHeight(data.crouchColiderHeight);
         startTime = Time.time;
@@ -68,6 +76,5 @@ public class PlayerDashState : PlayerGroundedState
 
         return  Time.time >= lastDashTime + data.dashCoolDown;
     }
-
 
 }

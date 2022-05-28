@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: Grab_Wall_Castle_3
+  m_Name: Ground_Castle_39
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: -1649526414, guid: 4e53c9b04134fb843a1b4173f7feec19, type: 3}
+  m_Sprite: {fileID: 1793451776, guid: 89715eb2647b6c748917a26b2f43b8e1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1

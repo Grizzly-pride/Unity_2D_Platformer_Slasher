@@ -23,6 +23,8 @@ public class PlayerData : ScriptableObject
     public float jumpForce = 11f;
     public float doubleJumpForce = 9f;
     public float airMoveX = 5f;
+    public float wallJumpForce = 11f;
+    public Vector2 wallJumpAngle = new Vector2(1, 2);
 
     [Header("LANDING STATE")]
     public float thresholdHardLanding = -15.0f;

@@ -13,7 +13,6 @@ public class PlayerGroundedState : PlayerState
 
     //Check
     protected bool isSlope;
-    protected bool isRoof;
     private bool isGrounded;
 
     public PlayerGroundedState(Player player, PlayerStateMachine stateMachine, PlayerData data, string animName) : base(player, stateMachine, data, animName)
@@ -29,7 +28,6 @@ public class PlayerGroundedState : PlayerState
     {
         base.DoChecks();
         isGrounded = player.CheckIfGrounded();
-        isRoof = player.CheckIfRoof();
         isSlope = player.CheckIfSlope();
     }
 
@@ -42,10 +40,6 @@ public class PlayerGroundedState : PlayerState
         xInput = player.InputController.NormInputX;
         jumpInput = player.InputController.JumpInput;
         dashImput = player.InputController.DashInput;
-
-
-        //Debug.Log(player.InputController.InputForceX);
-
 
 
         if (!isGrounded)

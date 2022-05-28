@@ -16,14 +16,16 @@ MonoBehaviour:
   frictionMaterial: {fileID: 6200000, guid: 57921e6d345b3d649b4f3c2b8bfb1be4, type: 2}
   runSpeed: 5
   walckSpeed: 2
-  runningThreshold: 0.75
+  runningThreshold: 0.8
   standColiderHeight: 1.38
   crouchSpeed: 2
   crouchColiderHeight: 0.84
   jumpForce: 11
   doubleJumpForce: 9
   airMoveX: 5
-  thresholdHardLanding: -15
+  wallJumpForce: 15
+  wallJumpAngle: {x: 1, y: 2}
+  thresholdHardLanding: -17
   dashSpeed: 9
   dashCoolDown: 0.5
   dashTime: 0.35

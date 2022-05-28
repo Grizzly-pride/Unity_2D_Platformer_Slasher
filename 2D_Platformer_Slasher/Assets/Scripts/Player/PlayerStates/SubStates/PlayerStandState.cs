@@ -28,17 +28,14 @@ public class PlayerStandState : PlayerGroundedState
 
         if (jumpInput)
         {
-            player.InputController.UseJumpInput();
             stateMachine.ChangeState(player.JumpState);
         }
         else if (dashImput && player.DashState.CheckIfCanDash())
         {
-            player.InputController.UseDashInput();
             stateMachine.ChangeState(player.DashState);
         }
         else if (sitDownInput)
-        {
-            player.InputController.UseSitDownInput();
+        {           
             stateMachine.ChangeState(player.SitDownState);
         }
     }

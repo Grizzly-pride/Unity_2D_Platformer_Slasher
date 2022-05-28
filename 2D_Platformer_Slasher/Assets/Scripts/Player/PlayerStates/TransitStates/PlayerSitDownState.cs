@@ -11,6 +11,7 @@ public class PlayerSitDownState : PlayerGroundedState
     public override void Enter()
     {
         base.Enter();
+        player.InputController.UseSitDownInput();
         player.SetPhysicsMaterial(data.frictionMaterial);
         player.SetVelocityZero();
     }
@@ -23,7 +24,6 @@ public class PlayerSitDownState : PlayerGroundedState
         {          
             if (jumpInput)
             {
-                player.InputController.UseJumpInput();
                 stateMachine.ChangeState(player.JumpState);
             }   
             else if (isAnimationFinished)

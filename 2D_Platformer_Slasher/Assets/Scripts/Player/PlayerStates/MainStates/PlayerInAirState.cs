@@ -9,7 +9,9 @@ public class PlayerInAirState : PlayerState
     private bool isGrounded;
     private bool deactCheckGround;
     private bool isSlope;
+    private bool isTouchingGrabWall;
     private float fallingSpeed;
+    
 
     public PlayerInAirState(Player player, PlayerStateMachine stateMachine, PlayerData data, string animName) : base(player, stateMachine, data, animName)  
     {
@@ -28,6 +30,7 @@ public class PlayerInAirState : PlayerState
         base.DoChecks();
         isGrounded = player.CheckIfGrounded();
         isSlope = player.CheckIfSlope();
+        isTouchingGrabWall = player.CheckIfWall();
         CheckFallingSpeed();
 
     }
@@ -48,9 +51,17 @@ public class PlayerInAirState : PlayerState
         player.CheckIfShouldFlip(xInput);
         player.SetVelocityX(data.airMoveX * xInput);
 
-        if (!deactCheckGround)
+
+        if (isTouchingGrabWall && CheckEqualityXposition())
         {
-            if (isGrounded && !isSlope && player.currentMotion.y <= 0.01f || isGrounded && isSlope)
+            stateMachine.ChangeState(player.LandingOnWallState);
+        }
+
+
+        else if (!deactCheckGround)
+        {
+
+            if (isGrounded && !isSlope && player.CurrentMotion.y <= 0.01f || isGrounded && isSlope)
             {
                 if (fallingSpeed <= data.thresholdHardLanding)
                 {
@@ -62,13 +73,27 @@ public class PlayerInAirState : PlayerState
                 }
             }
         }
+        
+
     }
 
     private void CheckFallingSpeed()
     {
-        if (!isGrounded && player.currentMotion.y <= -0.01f)
+        if (!isGrounded && player.CurrentMotion.y <= -0.01f)
         {
-            fallingSpeed = player.currentMotion.y;
+            fallingSpeed = player.CurrentMotion.y;
+        }
+    }
+
+    private bool CheckEqualityXposition()
+    {
+        if (player.CurrentPos.x == player.LastPos.x)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 

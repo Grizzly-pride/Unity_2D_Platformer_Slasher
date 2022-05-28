@@ -6,10 +6,17 @@ public class PlayerCrouchState : PlayerGroundedState
 {
 
     private bool standUpInput;
+    protected bool isRoof;
 
     public PlayerCrouchState(Player player, PlayerStateMachine stateMachine, PlayerData data, string animName) : base(player, stateMachine, data, animName)
     {
 
+    }
+
+    public override void DoChecks()
+    {
+        base.DoChecks();
+        isRoof = player.CheckIfRoof();
     }
 
     public override void Enter()
@@ -17,7 +24,7 @@ public class PlayerCrouchState : PlayerGroundedState
         base.Enter();
         player.SetColliderHeight(data.crouchColiderHeight);
         player.wasCrouch = true;
-        player.InputController.UseStandUpInput();
+
     }
 
     public override void Exit()
@@ -35,7 +42,6 @@ public class PlayerCrouchState : PlayerGroundedState
 
         if (dashImput && player.DashState.CheckIfCanDash())
         {
-            player.InputController.UseDashInput();
             stateMachine.ChangeState(player.DashState);
         }
 
@@ -43,12 +49,10 @@ public class PlayerCrouchState : PlayerGroundedState
         {
             if (jumpInput)
             {
-                player.InputController.UseJumpInput();
                 stateMachine.ChangeState(player.JumpState);
             }
             else if (standUpInput)
             {
-                player.InputController.UseStandUpInput();
                 stateMachine.ChangeState(player.StandUpState);
             }
         }

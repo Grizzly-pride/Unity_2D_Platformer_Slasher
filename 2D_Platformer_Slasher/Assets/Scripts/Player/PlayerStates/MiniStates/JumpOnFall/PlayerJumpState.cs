@@ -12,8 +12,11 @@ public class PlayerJumpState : PlayerInAirState
     public override void Enter()
     {
         base.Enter();
+        player.InputController.UseJumpInput();
         SetDeactivatedCheckGround();
+
         player.SetVelocityY(data.jumpForce);
+        
     }
 
     public override void LogicUpdate()
@@ -22,10 +25,9 @@ public class PlayerJumpState : PlayerInAirState
 
         if (dobleJumpInput)
         {
-            player.InputController.UseJumpInput();
             stateMachine.ChangeState(player.DoubleJumpState);
         }
-        else if (player.currentMotion.y < 0.01f)
+        else if (player.CurrentMotion.y < 0.01f)
         {
             stateMachine.ChangeState(player.FallState);
         }

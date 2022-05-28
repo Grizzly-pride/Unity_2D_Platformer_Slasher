@@ -37,7 +37,6 @@ public class PlayerLandState : PlayerGroundedState
             
             else if (jumpInput)
             {
-                player.InputController.UseJumpInput();
                 stateMachine.ChangeState(player.JumpState);
             }
             

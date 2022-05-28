@@ -11,6 +11,7 @@ public class PlayerDoubleJumpState : PlayerInAirState
     public override void Enter()
     {
         base.Enter();
+        player.InputController.UseJumpInput();
         SetAactivatedCheckGround();
         player.SetVelocityY(data.doubleJumpForce);
     }

@@ -8,7 +8,8 @@ public class PlayerInputController : MonoBehaviour
 
     private PlayerInput playerInput;
     public Vector2 MoveInput { get; private set; }
-    public float InputForceX { get; private set; }   
+    public float InputForceX { get; private set; }
+    public float InputForceY { get; private set; }
     public int NormInputX { get; private set;}
     public int NormInputY { get; private set; }
     public bool JumpInput { get; private set; }
@@ -36,9 +37,28 @@ public class PlayerInputController : MonoBehaviour
     public void OnMoveInput(InputAction.CallbackContext context)
     {
         MoveInput = context.ReadValue<Vector2>();
+
         InputForceX = Mathf.Abs(MoveInput.x);
-        NormInputX = (int)(MoveInput * Vector2.right).normalized.x;
-        NormInputY = (int)(MoveInput * Vector2.up).normalized.y;      
+        InputForceY = Mathf.Abs(MoveInput.y);
+
+        if (InputForceX > 0.5f)
+        {
+            NormInputX = (int)(MoveInput * Vector2.right).normalized.x;
+        }
+        else
+        {
+            NormInputX = 0;
+        }
+
+        if (InputForceY > 0.5f)
+        {
+            NormInputY = (int)(MoveInput * Vector2.up).normalized.y;
+        }
+        else
+        {
+            NormInputY = 0;
+        }
+    
     }
 
     public void OnJumpInput(InputAction.CallbackContext context)

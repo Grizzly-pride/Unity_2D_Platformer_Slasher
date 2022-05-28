@@ -11,6 +11,7 @@ public class PlayerStandUpState : PlayerGroundedState
     public override void Enter()
     {
         base.Enter();
+        player.InputController.UseStandUpInput();
         player.SetPhysicsMaterial(data.frictionMaterial);
         player.SetVelocityZero();
     }
