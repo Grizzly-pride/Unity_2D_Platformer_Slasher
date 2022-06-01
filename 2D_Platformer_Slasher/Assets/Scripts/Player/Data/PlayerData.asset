@@ -20,12 +20,16 @@ MonoBehaviour:
   standColiderHeight: 1.38
   crouchSpeed: 2
   crouchColiderHeight: 0.84
-  jumpForce: 11
+  jumpForce: 12
   doubleJumpForce: 9
   airMoveX: 5
-  wallJumpForce: 15
-  wallJumpAngle: {x: 1, y: 2}
+  wallJumpTime: 0.2
+  wallJumpForce: 13
+  wallJumpAngle: {x: 1, y: 4}
   thresholdHardLanding: -17
-  dashSpeed: 9
-  dashCoolDown: 0.5
-  dashTime: 0.35
+  dashStandSpeed: 9
+  dashStandCoolDown: 0.5
+  dashStandTime: 0.3
+  dashCrouchSpeed: 9
+  dashCrouchCoolDown: 0.5
+  dashCrouchTime: 0.3

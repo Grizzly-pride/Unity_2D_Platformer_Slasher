@@ -7,8 +7,7 @@ public class PlayerInAirState : PlayerState
     private int xInput;
     protected bool dobleJumpInput;
     private bool isGrounded;
-    private bool deactCheckGround;
-    private bool isSlope;
+    private bool isFall;
     private bool isTouchingGrabWall;
     private float fallingSpeed;
     
@@ -20,18 +19,20 @@ public class PlayerInAirState : PlayerState
     public override void Enter()
     {
         base.Enter();
+        isFall = false;   
         player.wasCrouch = false;
         player.SetColliderHeight(data.standColiderHeight);
-        player.SetPhysicsMaterial(data.noFrictionMaterial);
+        player.SetGravityOn();
     }
 
     public override void DoChecks()
     {
         base.DoChecks();
         isGrounded = player.CheckIfGrounded();
-        isSlope = player.CheckIfSlope();
         isTouchingGrabWall = player.CheckIfWall();
         CheckFallingSpeed();
+        ChechIfFall();
+
 
     }
 
@@ -48,57 +49,53 @@ public class PlayerInAirState : PlayerState
         dobleJumpInput = player.InputController.JumpInput;
         xInput = player.InputController.NormInputX;
 
-        player.CheckIfShouldFlip(xInput);
-        player.SetVelocityX(data.airMoveX * xInput);
-
-
-        if (isTouchingGrabWall && CheckEqualityXposition())
-        {
-            stateMachine.ChangeState(player.LandingOnWallState);
-        }
-
-
-        else if (!deactCheckGround)
-        {
-
-            if (isGrounded && !isSlope && player.CurrentMotion.y <= 0.01f || isGrounded && isSlope)
-            {
-                if (fallingSpeed <= data.thresholdHardLanding)
-                {
-                    stateMachine.ChangeState(player.HardLanding);
-                }
-                else if (fallingSpeed > data.thresholdHardLanding)
-                {
-                    stateMachine.ChangeState(player.LandState);
-                }
-            }
-        }
         
+        if (isTouchingGrabWall)
+        {
+            stateMachine.ChangeState(player.IdleOnWallState);
 
+        }   
+        
+        else if (isGrounded && isFall)
+        {
+
+            if (fallingSpeed <= data.thresholdHardLanding)
+            {
+                stateMachine.ChangeState(player.HardLanding);
+            }
+            else if (fallingSpeed > data.thresholdHardLanding)
+            {
+                stateMachine.ChangeState(player.LandState);
+            }
+        }       
+        else
+        {
+            player.CheckIfShouldFlip(xInput);
+            player.SetVelocityX(data.airMoveX * xInput);
+            player.Animator.SetFloat("yVelocity", player.CurrentMotion.y);            
+ 
+        }
+    }
+
+
+
+    private void ChechIfFall()
+    {
+        if(player.CurrentMotion.y < 0.01f && !isFall)
+        {           
+            isFall = true;
+
+        }
     }
 
     private void CheckFallingSpeed()
     {
         if (!isGrounded && player.CurrentMotion.y <= -0.01f)
         {
+             
             fallingSpeed = player.CurrentMotion.y;
         }
     }
-
-    private bool CheckEqualityXposition()
-    {
-        if (player.CurrentPos.x == player.LastPos.x)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-
-    protected void SetDeactivatedCheckGround() => deactCheckGround = true;
-    protected void SetAactivatedCheckGround() => deactCheckGround = false;
 
 
 }

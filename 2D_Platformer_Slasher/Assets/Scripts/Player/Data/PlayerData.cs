@@ -23,15 +23,23 @@ public class PlayerData : ScriptableObject
     public float jumpForce = 11f;
     public float doubleJumpForce = 9f;
     public float airMoveX = 5f;
-    public float wallJumpForce = 11f;
+
+    [Header("JUMP WALL STATE")]
+    public float wallJumpTime = 0.4f;
+    public float wallJumpForce = 20f;
     public Vector2 wallJumpAngle = new Vector2(1, 2);
 
     [Header("LANDING STATE")]
     public float thresholdHardLanding = -15.0f;
 
-    [Header("DASH STATE")]
-    public float dashSpeed = 9f;
-    public float dashCoolDown = 0.5f;
-    public float dashTime = 0.3f;   
+    [Header("DASH STAND STATE")]
+    public float dashStandSpeed = 9f;
+    public float dashStandCoolDown = 0.5f;
+    public float dashStandTime = 0.3f;
+
+    [Header("DASH CROUCH STATE")]
+    public float dashCrouchSpeed = 9f;
+    public float dashCrouchCoolDown = 0.5f;
+    public float dashCrouchTime = 0.3f;
 
 }

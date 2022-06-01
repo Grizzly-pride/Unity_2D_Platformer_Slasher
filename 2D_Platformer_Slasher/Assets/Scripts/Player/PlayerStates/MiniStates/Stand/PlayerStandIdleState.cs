@@ -10,8 +10,9 @@ public class PlayerStandIdleState : PlayerStandState
     public override void Enter()
     {
         base.Enter();
-        player.SetPhysicsMaterial(data.frictionMaterial);
+
         player.SetVelocityZero();
+
     }
 
 

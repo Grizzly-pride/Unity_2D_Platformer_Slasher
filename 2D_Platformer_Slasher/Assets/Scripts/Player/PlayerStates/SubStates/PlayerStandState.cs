@@ -17,6 +17,7 @@ public class PlayerStandState : PlayerGroundedState
     {
         base.Enter();
         player.wasCrouch = false;
+        player.SetColliderHeight(data.standColiderHeight);
         player.InputController.UseStandUpInput();
     }
 
@@ -30,9 +31,9 @@ public class PlayerStandState : PlayerGroundedState
         {
             stateMachine.ChangeState(player.JumpState);
         }
-        else if (dashImput && player.DashState.CheckIfCanDash())
+        else if (dashImput && player.DashStandState.CheckIfCanDash())
         {
-            stateMachine.ChangeState(player.DashState);
+            stateMachine.ChangeState(player.DashStandState);
         }
         else if (sitDownInput)
         {           

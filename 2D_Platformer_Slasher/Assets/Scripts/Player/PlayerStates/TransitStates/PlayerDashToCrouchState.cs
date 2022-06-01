@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerDashToCrouchState : PlayerGroundedState
+public class PlayerDashToCrouchState : PlayerDashState
 {
     public PlayerDashToCrouchState(Player player, PlayerStateMachine stateMachine, PlayerData data, string animName) : base(player, stateMachine, data, animName)
     {
@@ -11,7 +11,6 @@ public class PlayerDashToCrouchState : PlayerGroundedState
     public override void Enter()
     {
         base.Enter();
-        player.SetPhysicsMaterial(data.frictionMaterial);
         player.SetVelocityZero();
     }
 
@@ -23,7 +22,7 @@ public class PlayerDashToCrouchState : PlayerGroundedState
         {
             if (isAnimationFinished)
             {
-                stateMachine.ChangeState(player.CrouchIdleState);
+                isAbilityDone = true;
             }
 
         }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerDashToStandState : PlayerGroundedState
+public class PlayerDashToStandState : PlayerDashState
 {
     public PlayerDashToStandState(Player player, PlayerStateMachine stateMachine, PlayerData data, string animName) : base(player, stateMachine, data, animName)
     {
@@ -11,9 +11,8 @@ public class PlayerDashToStandState : PlayerGroundedState
     public override void Enter()
     {
         base.Enter();
-        player.SetPhysicsMaterial(data.frictionMaterial);
         player.SetVelocityZero();
-        player.SetColliderHeight(data.standColiderHeight);
+
     }
 
     public override void LogicUpdate()
@@ -24,7 +23,7 @@ public class PlayerDashToStandState : PlayerGroundedState
         {
             if (isAnimationFinished)
             {
-                stateMachine.ChangeState(player.StandIdleState);
+                isAbilityDone = true;
 
             }
 

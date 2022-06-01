@@ -21,19 +21,24 @@ public class PlayerGroundedState : PlayerState
     
     public override void Enter()
     {
-        base.Enter();        
+        base.Enter();
+
     }
 
     public override void DoChecks()
     {
         base.DoChecks();
+
         isGrounded = player.CheckIfGrounded();
         isSlope = player.CheckIfSlope();
+        HoldOnSlope();
+
     }
 
     public override void LogicUpdate()
     {
         base.LogicUpdate();
+
         SetAnimation();
 
         xInputForce = player.InputController.InputForceX;
@@ -44,7 +49,7 @@ public class PlayerGroundedState : PlayerState
 
         if (!isGrounded)
         {
-            stateMachine.ChangeState(player.FallState);
+            stateMachine.ChangeState(player.InAirState);
         }
     }
 
@@ -52,4 +57,17 @@ public class PlayerGroundedState : PlayerState
     {
         player.Animator.SetBool("wasCrouch", player.wasCrouch);
     }
+
+    private void HoldOnSlope()
+    {
+        if (isSlope && player.RB.gravityScale.Equals(1))
+        {
+            player.SetGravityOff();
+        }
+        else if (!isSlope && player.RB.gravityScale.Equals(0))
+        {
+            player.SetGravityOn();
+        }
+    }
+
 }

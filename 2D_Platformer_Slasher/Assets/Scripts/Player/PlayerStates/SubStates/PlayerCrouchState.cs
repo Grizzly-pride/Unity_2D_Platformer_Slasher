@@ -27,12 +27,7 @@ public class PlayerCrouchState : PlayerGroundedState
 
     }
 
-    public override void Exit()
-    {
-        base.Exit();
-        player.SetColliderHeight(data.standColiderHeight);
-        
-    }
+
 
     public override void LogicUpdate()
     {
@@ -40,9 +35,9 @@ public class PlayerCrouchState : PlayerGroundedState
 
         standUpInput = player.InputController.StandUpInput;
 
-        if (dashImput && player.DashState.CheckIfCanDash())
+        if (dashImput && player.DashCrouchState.CheckIfCanDash())
         {
-            stateMachine.ChangeState(player.DashState);
+            stateMachine.ChangeState(player.DashCrouchState);
         }
 
         if (!isRoof)

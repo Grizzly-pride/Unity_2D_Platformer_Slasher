@@ -8,18 +8,22 @@ public class PlayerOnWallState : PlayerState
     {
     }
 
-    private Vector2 holdPosition;
+    protected bool isTouchingGrabWall;
+
 
     public override void DoChecks()
     {
         base.DoChecks();
+
+        isTouchingGrabWall = player.CheckIfWall();
+
+
     }
 
     public override void Enter()
     {
         base.Enter();
-        holdPosition = player.transform.position;
-        HoldPosition();
+
 
     }
 
@@ -32,10 +36,7 @@ public class PlayerOnWallState : PlayerState
     {
         base.LogicUpdate();
 
-        if (!isExitingState)
-        {
-            HoldPosition();
-        }
+
 
     }
 
@@ -44,10 +45,6 @@ public class PlayerOnWallState : PlayerState
         base.PhysicsUpdate();
     }
 
-    private void HoldPosition()
-    {
-        player.transform.position = holdPosition;
-        player.SetVelocityZero();
 
-    }
+
 }

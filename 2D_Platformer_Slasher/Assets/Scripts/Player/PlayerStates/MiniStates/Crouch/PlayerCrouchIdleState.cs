@@ -10,7 +10,8 @@ public class PlayerCrouchIdleState : PlayerCrouchState
     public override void Enter()
     {
         base.Enter();
-        player.SetPhysicsMaterial(data.frictionMaterial);
+
+
         player.SetVelocityZero();
     }
 

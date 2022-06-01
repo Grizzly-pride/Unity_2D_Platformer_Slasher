@@ -45,6 +45,8 @@ public class PlayerState
     {
         DoChecks();
     }
+
+
  
     public virtual void PhysicsUpdate()
     {

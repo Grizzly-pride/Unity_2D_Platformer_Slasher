@@ -8,6 +8,9 @@ public class PlayerLandingOnWallState : PlayerOnWallState
     {
     }
 
+    private Vector2 currentPos;
+    private Vector2 lastPos;
+
 
     public override void DoChecks()
     {
@@ -18,6 +21,7 @@ public class PlayerLandingOnWallState : PlayerOnWallState
     public override void Enter()
     {
         base.Enter();
+
     }
 
     public override void Exit()
@@ -29,11 +33,32 @@ public class PlayerLandingOnWallState : PlayerOnWallState
     {
         base.LogicUpdate();
 
+
+
+
+
         if (isAnimationFinished)
         {
+            lastPos.x = player.transform.position.x;
             stateMachine.ChangeState(player.IdleOnWallState);
         }
+
+
+
+
     }
 
 
+    private bool CheckEqualityXposition()
+    {
+
+        if (currentPos.x.Equals(lastPos.x))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 }

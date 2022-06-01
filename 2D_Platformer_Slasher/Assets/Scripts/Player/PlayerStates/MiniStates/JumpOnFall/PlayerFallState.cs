@@ -16,8 +16,7 @@ public class PlayerFallState : PlayerInAirState
     public override void Enter()
     {
         base.Enter();
-        SetAactivatedCheckGround();
-
+        //SetAactivatedCheck();
     }
 
     public override void Exit()
@@ -28,13 +27,17 @@ public class PlayerFallState : PlayerInAirState
 
     public override void LogicUpdate()
     {
-        base.LogicUpdate();       
-                         
-        if (dobleJumpInput)
+        base.LogicUpdate();
+
+        if (!isExitingState)
         {
-            player.InputController.UseJumpInput();
-            stateMachine.ChangeState(player.DoubleJumpState);              
-        }
+            if (dobleJumpInput)
+            {
+                player.InputController.UseJumpInput();
+                stateMachine.ChangeState(player.DoubleJumpState);
+            }
+        }                 
+
     }
 
     public override void PhysicsUpdate()

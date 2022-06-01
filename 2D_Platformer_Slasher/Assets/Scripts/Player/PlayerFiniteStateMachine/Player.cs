@@ -19,11 +19,15 @@ public class Player : MonoBehaviour
     public PlayerCrouchMoveState CrouchMoveState { get; private set; }
     public PlayerSitDownState SitDownState { get; private set; }
     public PlayerStandUpState StandUpState { get; private set; }
-    public PlayerDashState DashState { get; private set; }
+    public PlayerDashState DashState { get; private set; }  
+    public PlayerDashStandState DashStandState { get; private set; }
     public PlayerDashToStandState DashToStandState { get; private set; }
+    public PlayerDashCrouchState DashCrouchState { get; private set; }
     public PlayerDashToCrouchState DashToCrouchState { get; private set; }
     public PlayerIdleOnWallState IdleOnWallState { get; private set; }  
     public PlayerLandingOnWallState LandingOnWallState { get; private set; }
+    public PlayerInAirState InAirState { get; private set; }
+    public PlayerWallJumpState WallJumpState { get; private set; } 
     #endregion
 
     #region Components
@@ -39,13 +43,12 @@ public class Player : MonoBehaviour
     #region Variables
     [SerializeField] private PlayerData data;
 
-    public Vector2 CurrentPos { get; private set; }
-    public Vector2 LastPos { get; private set; }
     public Vector2 CurrentMotion { get; private set; }
     public Vector2 vectorWorkSpace;
 
     public int FacingDirection { get; private set; }
     public bool wasCrouch;
+    public bool wasWall;
 
     #endregion
 
@@ -59,20 +62,29 @@ public class Player : MonoBehaviour
         WalckState = new PlayerWalckState(this, StateMachine, data, "walck");
         RunState = new PlayerRunState(this, StateMachine, data, "run");
         RunStopState = new PlayerRunStopState(this, StateMachine, data, "runStop");
-        JumpState = new PlayerJumpState(this, StateMachine, data, "jump");
-        DoubleJumpState = new PlayerDoubleJumpState(this, StateMachine, data, "doubleJump");
-        FallState = new PlayerFallState(this, StateMachine, data, "fall");
+
         LandState = new PlayerLandState(this, StateMachine, data, "land");
         HardLanding = new PlayerHardLanding(this, StateMachine, data, "hardLanding");
+
         CrouchIdleState = new PlayerCrouchIdleState(this, StateMachine, data, "crouchIdle");
         CrouchMoveState = new PlayerCrouchMoveState(this, StateMachine, data, "crouchMove");
+
         SitDownState = new PlayerSitDownState(this, StateMachine, data, "sitDown");
         StandUpState = new PlayerStandUpState(this, StateMachine, data, "standUp");
+
+        DashStandState = new PlayerDashStandState(this, StateMachine, data, "dashStand");
         DashToStandState = new PlayerDashToStandState(this, StateMachine, data, "dashToStand");
+
+        DashCrouchState = new PlayerDashCrouchState(this, StateMachine, data, "dashCrouch");
         DashToCrouchState = new PlayerDashToCrouchState(this, StateMachine, data, "dashToCrouch");
-        DashState = new PlayerDashState(this, StateMachine, data, "dash");
+
         IdleOnWallState = new PlayerIdleOnWallState(this, StateMachine, data, "idleOnWall");
         LandingOnWallState = new PlayerLandingOnWallState(this, StateMachine, data, "landingOnWall");
+
+        InAirState = new PlayerInAirState(this, StateMachine, data, "inAir");
+        JumpState = new PlayerJumpState(this, StateMachine, data, "inAir");
+
+        //WallJumpState = new PlayerWallJumpState(this, StateMachine, data, "jump");  
 
         //Sensors
         GroundSensor = transform.Find("GroundCheck").GetComponent<SensorSurface>();
@@ -105,15 +117,14 @@ public class Player : MonoBehaviour
     }
 
     private void Update()
-    {
-        CurrentPos = transform.position;    
+    { 
         CurrentMotion = RB.velocity;
 
         StateMachine.CurrentState.LogicUpdate(); 
-        
-        LastPos = transform.position;
-
+              
     }
+
+
     #endregion
 
     #region Set Functions   
@@ -129,7 +140,6 @@ public class Player : MonoBehaviour
         {
             MovementOnSmooth(velocity, xDirect);
         }
-
     }
 
     public void MovementOnSlope(float velocity, int xDirect)
@@ -190,6 +200,15 @@ public class Player : MonoBehaviour
     public void SetPhysicsMaterial(PhysicsMaterial2D material)
     {
         RB.sharedMaterial = material;
+    }
+
+    public void SetGravityOff()
+    {
+        RB.gravityScale = 0.0f;
+    }
+    public void SetGravityOn()
+    {
+        RB.gravityScale = 1.0f;
     }
 
     public void SetFlip()

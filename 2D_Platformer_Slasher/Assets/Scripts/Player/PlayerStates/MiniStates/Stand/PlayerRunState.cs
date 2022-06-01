@@ -12,7 +12,7 @@ public class PlayerRunState : PlayerStandState
     public override void Enter()
     {
         base.Enter();
-        player.SetPhysicsMaterial(data.noFrictionMaterial);
+
     }
 
     public override void LogicUpdate()
