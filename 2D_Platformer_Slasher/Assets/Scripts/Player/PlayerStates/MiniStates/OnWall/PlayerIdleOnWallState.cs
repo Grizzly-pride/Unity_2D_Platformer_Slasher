@@ -9,7 +9,6 @@ public class PlayerIdleOnWallState : PlayerOnWallState
     }
 
     private bool jumpInput;
-    private Vector2 holdPosition;
 
     public override void DoChecks()
     {
@@ -20,9 +19,7 @@ public class PlayerIdleOnWallState : PlayerOnWallState
     public override void Enter()
     {
         base.Enter();
-        //holdPosition.y = player.transform.position.y;
-        //HoldPosition();
-        player.SetPhysicsMaterial(data.frictionMaterial);
+
     }
 
     public override void Exit()
@@ -36,9 +33,7 @@ public class PlayerIdleOnWallState : PlayerOnWallState
 
         if (!isExitingState)
         {
-            //HoldPosition();
-            Debug.Log(player.FacingDirection);
-            player.SetVelocityX(data.airMoveX * player.FacingDirection);
+
 
             jumpInput = player.InputController.JumpInput;
 
@@ -50,18 +45,5 @@ public class PlayerIdleOnWallState : PlayerOnWallState
         }
 
     }
-
-
-    /*
-
-    private void HoldPosition()
-    {
-        holdPosition.x = player.CurrentMotion.x;
-        player.transform.position = holdPosition;
-        player.SetVelocityZero();
-
-    }
-
-    */
-
+    
 }

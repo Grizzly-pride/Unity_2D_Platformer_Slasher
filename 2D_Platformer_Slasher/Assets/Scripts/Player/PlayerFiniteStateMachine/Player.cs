@@ -11,8 +11,6 @@ public class Player : MonoBehaviour
     public PlayerWalckState WalckState { get; private set;}
     public PlayerRunStopState RunStopState { get; private set; }
     public PlayerJumpState JumpState { get; private set; }
-    public PlayerDoubleJumpState DoubleJumpState { get; private set; }
-    public PlayerFallState FallState { get; private set; }
     public PlayerLandState LandState { get; private set; }
     public PlayerHardLanding HardLanding { get; private set; }
     public PlayerCrouchIdleState CrouchIdleState { get; private set; }
@@ -49,7 +47,6 @@ public class Player : MonoBehaviour
     public int FacingDirection { get; private set; }
     public bool wasCrouch;
     public bool wasWall;
-
     #endregion
 
     #region Unity Functions
@@ -119,9 +116,7 @@ public class Player : MonoBehaviour
     private void Update()
     { 
         CurrentMotion = RB.velocity;
-
-        StateMachine.CurrentState.LogicUpdate(); 
-              
+        StateMachine.CurrentState.LogicUpdate();            
     }
 
 
@@ -221,7 +216,7 @@ public class Player : MonoBehaviour
     #region Check Functions
     public bool CheckIfGrounded()
     {
-        GroundSensor.CheckSurface();
+        GroundSensor.CheckSurface(FacingDirection);
         return GroundSensor.detected;
     }
 
@@ -240,7 +235,7 @@ public class Player : MonoBehaviour
     
     public bool CheckIfSlope()
     {
-        GroundSensor.CheckSurface();
+        GroundSensor.CheckSurface(FacingDirection);
         return GroundSensor.isOnSlope;
     }
 

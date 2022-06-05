@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class PlayerJumpState : PlayerAbilityState
 {
-
+    public int AmountOfJumpsLeft { get; private set; }
     public PlayerJumpState(Player player, PlayerStateMachine stateMachine, PlayerData data, string animName) : base(player, stateMachine, data, animName)
     {
+        AmountOfJumpsLeft = data.amountOfJumps;
     }
 
     public override void Enter()
@@ -18,14 +19,19 @@ public class PlayerJumpState : PlayerAbilityState
     }
 
 
-    public override void LogicUpdate()
+    public bool CanJump()
     {
-        base.LogicUpdate();
-
-
-
+        if (AmountOfJumpsLeft > 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
-    
+    public void ResetAmountOfJumpsLeft() => AmountOfJumpsLeft = data.amountOfJumps;
+    public void DecreaseAmountOfJumpsLeft() => AmountOfJumpsLeft--;
 
 }

@@ -7,8 +7,8 @@ public class SensorCollision : MonoBehaviour
     [SerializeField] private bool checkOr;
     [SerializeField] private LayerMask whatIsCheckLayerHit1;
     [SerializeField] private LayerMask whatIsCheckLayerHit2;
-    [SerializeField] private Vector2 hitPosition1;
-    [SerializeField] private Vector2 hitPosition2;
+    [SerializeField] public Vector2 hitPosition1;
+    [SerializeField] public Vector2 hitPosition2;
     [SerializeField] private float CheckDistance;
     [SerializeField] private Vector2 direction1;
     [SerializeField] private Vector2 direction2;
@@ -16,6 +16,9 @@ public class SensorCollision : MonoBehaviour
     private RaycastHit2D hit1;
     private RaycastHit2D hit2;
     public bool detected;
+
+    public Vector2 pointHit1;
+    public float distance;
 
     private int objectDirection;
    
@@ -32,10 +35,12 @@ public class SensorCollision : MonoBehaviour
             if (hit1 || hit2)
             {
                 detected = true;
+                pointHit1 = hit1.point;
+                distance = hit1.distance;
+                
             }
             else
             {
-
                 detected = false;
             }
         }
@@ -44,6 +49,9 @@ public class SensorCollision : MonoBehaviour
             if (hit1 && hit2)
             {
                 detected = true;
+                pointHit1 = hit1.point;
+                distance = hit1.distance;
+
             }
             else
             {
@@ -64,6 +72,8 @@ public class SensorCollision : MonoBehaviour
             if (hit1 || hit2)
             {
                 detected = true;
+                pointHit1 = hit1.point;
+                distance = hit1.distance;
             }
             else
             {
@@ -76,6 +86,8 @@ public class SensorCollision : MonoBehaviour
             if (hit1 && hit2)
             {
                 detected = true;
+                pointHit1 = hit1.point;
+                distance = hit1.distance;
             }
             else
             {

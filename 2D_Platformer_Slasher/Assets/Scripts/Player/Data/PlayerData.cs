@@ -20,8 +20,8 @@ public class PlayerData : ScriptableObject
     public float crouchColiderHeight = 0.84f;
 
     [Header("JUMP STATE")]
+    public int amountOfJumps = 1;
     public float jumpForce = 11f;
-    public float doubleJumpForce = 9f;
     public float airMoveX = 5f;
 
     [Header("JUMP WALL STATE")]

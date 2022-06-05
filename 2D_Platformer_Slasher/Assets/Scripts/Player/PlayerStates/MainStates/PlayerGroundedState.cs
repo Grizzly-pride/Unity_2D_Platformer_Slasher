@@ -22,6 +22,7 @@ public class PlayerGroundedState : PlayerState
     public override void Enter()
     {
         base.Enter();
+        player.JumpState.ResetAmountOfJumpsLeft();
 
     }
 
@@ -56,15 +57,16 @@ public class PlayerGroundedState : PlayerState
     private void SetAnimation()
     {
         player.Animator.SetBool("wasCrouch", player.wasCrouch);
+        player.Animator.SetInteger("amountJump", player.JumpState.AmountOfJumpsLeft);
     }
 
     private void HoldOnSlope()
     {
-        if (isSlope && player.RB.gravityScale.Equals(1))
+        if (isSlope && !player.RB.gravityScale.Equals(0))
         {
             player.SetGravityOff();
         }
-        else if (!isSlope && player.RB.gravityScale.Equals(0))
+        else if (!isSlope && !player.RB.gravityScale.Equals(1))
         {
             player.SetGravityOn();
         }
