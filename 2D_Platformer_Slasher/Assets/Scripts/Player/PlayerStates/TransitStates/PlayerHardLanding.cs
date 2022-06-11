@@ -11,8 +11,10 @@ public class PlayerHardLanding : PlayerGroundedState
     public override void Enter()
     {
         base.Enter();
-        player.SetGravityOff();
+
+        player.SetPhysicsMaterial(data.frictionMaterial);
         player.SetVelocityZero();
+        player.JumpState.ResetAmountOfJumpsLeft();
     }
 
     public override void LogicUpdate()

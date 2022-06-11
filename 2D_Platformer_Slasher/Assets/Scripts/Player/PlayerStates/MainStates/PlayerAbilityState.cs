@@ -11,13 +11,14 @@ public class PlayerAbilityState : PlayerState
     protected bool isAbilityDone;
     protected bool isGrounded;
     protected bool isRoof;
+    protected bool isSlope;
 
     public override void DoChecks()
     {
         base.DoChecks();
         isGrounded  = player.CheckIfGrounded();
         isRoof = player.CheckIfRoof();
-
+        isSlope = player.CheckIfSlope();
     }
 
     public override void Enter()

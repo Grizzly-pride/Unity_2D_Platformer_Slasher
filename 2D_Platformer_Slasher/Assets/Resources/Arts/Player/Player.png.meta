@@ -1199,8 +1199,8 @@ TextureImporter:
       name: Player_53
       rect:
         serializedVersion: 2
-        x: 0
-        y: 480
+        x: 200
+        y: 560
         width: 100
         height: 80
       alignment: 9
@@ -1220,7 +1220,7 @@ TextureImporter:
       name: Player_54
       rect:
         serializedVersion: 2
-        x: 100
+        x: 0
         y: 480
         width: 100
         height: 80
@@ -1241,8 +1241,8 @@ TextureImporter:
       name: Player_55
       rect:
         serializedVersion: 2
-        x: 0
-        y: 400
+        x: 100
+        y: 480
         width: 100
         height: 80
       alignment: 9
@@ -1262,7 +1262,7 @@ TextureImporter:
       name: Player_56
       rect:
         serializedVersion: 2
-        x: 100
+        x: 0
         y: 400
         width: 100
         height: 80
@@ -1283,7 +1283,7 @@ TextureImporter:
       name: Player_57
       rect:
         serializedVersion: 2
-        x: 200
+        x: 100
         y: 400
         width: 100
         height: 80
@@ -1304,7 +1304,7 @@ TextureImporter:
       name: Player_58
       rect:
         serializedVersion: 2
-        x: 300
+        x: 200
         y: 400
         width: 100
         height: 80
@@ -1325,7 +1325,7 @@ TextureImporter:
       name: Player_59
       rect:
         serializedVersion: 2
-        x: 400
+        x: 300
         y: 400
         width: 100
         height: 80
@@ -1346,7 +1346,7 @@ TextureImporter:
       name: Player_60
       rect:
         serializedVersion: 2
-        x: 500
+        x: 400
         y: 400
         width: 100
         height: 80
@@ -1367,7 +1367,7 @@ TextureImporter:
       name: Player_61
       rect:
         serializedVersion: 2
-        x: 600
+        x: 500
         y: 400
         width: 100
         height: 80
@@ -1388,7 +1388,7 @@ TextureImporter:
       name: Player_62
       rect:
         serializedVersion: 2
-        x: 700
+        x: 600
         y: 400
         width: 100
         height: 80
@@ -1409,8 +1409,8 @@ TextureImporter:
       name: Player_63
       rect:
         serializedVersion: 2
-        x: 0
-        y: 320
+        x: 700
+        y: 400
         width: 100
         height: 80
       alignment: 9
@@ -1431,7 +1431,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 240
+        y: 320
         width: 100
         height: 80
       alignment: 9
@@ -1451,7 +1451,7 @@ TextureImporter:
       name: Player_65
       rect:
         serializedVersion: 2
-        x: 100
+        x: 0
         y: 240
         width: 100
         height: 80
@@ -1472,7 +1472,7 @@ TextureImporter:
       name: Player_66
       rect:
         serializedVersion: 2
-        x: 200
+        x: 100
         y: 240
         width: 100
         height: 80
@@ -1493,7 +1493,7 @@ TextureImporter:
       name: Player_67
       rect:
         serializedVersion: 2
-        x: 300
+        x: 200
         y: 240
         width: 100
         height: 80
@@ -1514,7 +1514,7 @@ TextureImporter:
       name: Player_68
       rect:
         serializedVersion: 2
-        x: 400
+        x: 300
         y: 240
         width: 100
         height: 80
@@ -1535,7 +1535,7 @@ TextureImporter:
       name: Player_69
       rect:
         serializedVersion: 2
-        x: 500
+        x: 400
         y: 240
         width: 100
         height: 80
@@ -1556,8 +1556,8 @@ TextureImporter:
       name: Player_70
       rect:
         serializedVersion: 2
-        x: 0
-        y: 160
+        x: 500
+        y: 240
         width: 100
         height: 80
       alignment: 9
@@ -1578,7 +1578,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 80
+        y: 160
         width: 100
         height: 80
       alignment: 9
@@ -1598,7 +1598,7 @@ TextureImporter:
       name: Player_72
       rect:
         serializedVersion: 2
-        x: 100
+        x: 0
         y: 80
         width: 100
         height: 80
@@ -1619,7 +1619,7 @@ TextureImporter:
       name: Player_73
       rect:
         serializedVersion: 2
-        x: 200
+        x: 100
         y: 80
         width: 100
         height: 80
@@ -1640,7 +1640,7 @@ TextureImporter:
       name: Player_74
       rect:
         serializedVersion: 2
-        x: 300
+        x: 200
         y: 80
         width: 100
         height: 80
@@ -1682,8 +1682,8 @@ TextureImporter:
       name: Player_75
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
+        x: 300
+        y: 80
         width: 100
         height: 80
       alignment: 9
@@ -1703,7 +1703,7 @@ TextureImporter:
       name: Player_76
       rect:
         serializedVersion: 2
-        x: 100
+        x: 0
         y: 0
         width: 100
         height: 80
@@ -1724,7 +1724,7 @@ TextureImporter:
       name: Player_77
       rect:
         serializedVersion: 2
-        x: 200
+        x: 100
         y: 0
         width: 100
         height: 80
@@ -1745,7 +1745,7 @@ TextureImporter:
       name: Player_78
       rect:
         serializedVersion: 2
-        x: 300
+        x: 200
         y: 0
         width: 100
         height: 80
@@ -1766,7 +1766,7 @@ TextureImporter:
       name: Player_79
       rect:
         serializedVersion: 2
-        x: 400
+        x: 300
         y: 0
         width: 100
         height: 80
@@ -1787,7 +1787,7 @@ TextureImporter:
       name: Player_80
       rect:
         serializedVersion: 2
-        x: 500
+        x: 400
         y: 0
         width: 100
         height: 80
@@ -1808,7 +1808,7 @@ TextureImporter:
       name: Player_81
       rect:
         serializedVersion: 2
-        x: 600
+        x: 500
         y: 0
         width: 100
         height: 80
@@ -1829,7 +1829,7 @@ TextureImporter:
       name: Player_82
       rect:
         serializedVersion: 2
-        x: 700
+        x: 600
         y: 0
         width: 100
         height: 80
@@ -1842,6 +1842,27 @@ TextureImporter:
       bones: []
       spriteID: aac0cf5071715fa4583d8ac0bbb1330b
       internalID: 787474463
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_83
+      rect:
+        serializedVersion: 2
+        x: 700
+        y: 0
+        width: 100
+        height: 80
+      alignment: 9
+      pivot: {x: 0.5, y: 0.55}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2042f1842ee04fc4c8142917717a34f3
+      internalID: -1987562477
       vertices: []
       indices: 
       edges: []
@@ -1882,6 +1903,7 @@ TextureImporter:
       Player_7: -18189936
       Player_16: -821797141
       Player_67: 1365745728
+      Player_83: -1987562477
       Player_40: 1796656967
       Player_8: -1224465211
       Player_73: 1449139972

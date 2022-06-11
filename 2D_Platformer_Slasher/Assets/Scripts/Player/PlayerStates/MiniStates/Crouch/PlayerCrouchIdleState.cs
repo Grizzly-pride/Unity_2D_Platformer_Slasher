@@ -11,14 +11,14 @@ public class PlayerCrouchIdleState : PlayerCrouchState
     {
         base.Enter();
 
-
+        player.SetPhysicsMaterial(data.frictionMaterial);
         player.SetVelocityZero();
     }
 
     public override void Exit()
     {
         base.Exit();
-        player.SetPhysicsMaterial(data.noFrictionMaterial);
+
     }
 
     public override void LogicUpdate()

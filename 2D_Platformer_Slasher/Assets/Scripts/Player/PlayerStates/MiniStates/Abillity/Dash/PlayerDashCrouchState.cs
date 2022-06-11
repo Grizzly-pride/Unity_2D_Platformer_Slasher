@@ -18,6 +18,7 @@ public class PlayerDashCrouchState : PlayerDashState
     public override void Enter()
     {
         base.Enter();
+        player.SetPhysicsMaterial(data.noFrictionMaterial);
 
     }
 
@@ -34,10 +35,11 @@ public class PlayerDashCrouchState : PlayerDashState
             }
             else if (Time.time <= startTime + data.dashStandTime)
             {
-                player.MovementOnGround(isSlope, data.dashCrouchSpeed, player.FacingDirection);
+                applyMotion = true;
             }
             else if (!isGrounded)
             {
+                applyMotion = false;
                 isAbilityDone = true;
             }
             else
@@ -49,6 +51,17 @@ public class PlayerDashCrouchState : PlayerDashState
             }
 
         }
+    }
+
+    public override void PhysicsUpdate()
+    {
+        base.PhysicsUpdate();
+
+        if (applyMotion)
+        {
+            player.MovementOnGround(isSlope, data.dashCrouchSpeed, player.FacingDirection);
+        }
+
     }
 
 }

@@ -12,6 +12,7 @@ public class PlayerCrouchMoveState : PlayerCrouchState
     public override void Enter()
     {
         base.Enter();
+        player.SetPhysicsMaterial(data.noFrictionMaterial);
 
     }
 
@@ -22,9 +23,7 @@ public class PlayerCrouchMoveState : PlayerCrouchState
 
         if (!isExitingState)
         {
-            player.MovementOnGround(isSlope, data.crouchSpeed, xInput);
             player.CheckIfShouldFlip(xInput);
-
 
             if (xInput == 0)
             {
@@ -33,6 +32,17 @@ public class PlayerCrouchMoveState : PlayerCrouchState
 
         }
 
+    }
+
+    public override void PhysicsUpdate()
+    {
+        base.PhysicsUpdate();
+
+        if (!isExitingState)
+        {
+            player.MovementOnGround(isSlope, data.crouchSpeed, xInput);
+        }
+        
     }
 
 }

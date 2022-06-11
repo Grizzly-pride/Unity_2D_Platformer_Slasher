@@ -16,7 +16,8 @@ public class PlayerWalckState : PlayerStandState
     public override void Enter()
     {
         base.Enter();
- 
+        player.SetPhysicsMaterial(data.noFrictionMaterial);
+
     }
 
     public override void Exit()
@@ -30,9 +31,7 @@ public class PlayerWalckState : PlayerStandState
 
         if (!isExitingState)
         {
-            player.MovementOnGround(isSlope, data.walckSpeed, xInput);
             player.CheckIfShouldFlip(xInput);
-
 
             if (xInput == 0)
             {
@@ -44,6 +43,17 @@ public class PlayerWalckState : PlayerStandState
                 stateMachine.ChangeState(player.RunState);
             }
 
+        }
+    }
+
+    public override void PhysicsUpdate()
+    {
+        base.PhysicsUpdate();
+
+
+        if (!isExitingState)
+        {
+            player.MovementOnGround(isSlope, data.walckSpeed, xInput);
         }
     }
 }

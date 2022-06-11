@@ -22,7 +22,7 @@ public class PlayerGroundedState : PlayerState
     public override void Enter()
     {
         base.Enter();
-        player.JumpState.ResetAmountOfJumpsLeft();
+
 
     }
 
@@ -33,7 +33,7 @@ public class PlayerGroundedState : PlayerState
         isGrounded = player.CheckIfGrounded();
         isSlope = player.CheckIfSlope();
         HoldOnSlope();
-
+ 
     }
 
     public override void LogicUpdate()
@@ -71,5 +71,5 @@ public class PlayerGroundedState : PlayerState
             player.SetGravityOn();
         }
     }
-
+       
 }

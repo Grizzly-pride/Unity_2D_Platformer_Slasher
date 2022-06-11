@@ -8,19 +8,19 @@ public class PlayerDashState : PlayerAbilityState
     {
     }
 
-    protected bool isSlope;
     protected float lastDashTime;
+    protected bool applyMotion;
     public override void DoChecks()
     {
         base.DoChecks();
-        isSlope = player.CheckIfSlope();
         player.InputController.UseDashInput();
-        player.SetColliderHeight(data.crouchColiderHeight);     
+        HoldOnSlope();
     }
 
     public override void Enter()
     {
         base.Enter();
+        player.SetColliderHeight(data.crouchColiderHeight);
         player.InputController.UseDashInput();
         startTime = Time.time;
     }
@@ -28,9 +28,6 @@ public class PlayerDashState : PlayerAbilityState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-
-        HoldOnSlope();
-
     }
 
     public bool CheckIfCanDash()

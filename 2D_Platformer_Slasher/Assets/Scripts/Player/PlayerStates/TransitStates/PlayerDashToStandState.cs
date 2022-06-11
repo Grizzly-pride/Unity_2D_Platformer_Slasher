@@ -11,6 +11,7 @@ public class PlayerDashToStandState : PlayerDashState
     public override void Enter()
     {
         base.Enter();
+        player.SetPhysicsMaterial(data.frictionMaterial);
         player.SetVelocityZero();
 
     }

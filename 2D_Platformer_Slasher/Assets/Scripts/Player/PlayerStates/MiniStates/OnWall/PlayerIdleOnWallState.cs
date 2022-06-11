@@ -20,6 +20,7 @@ public class PlayerIdleOnWallState : PlayerOnWallState
     {
         base.Enter();
 
+        HoldPosition();
     }
 
     public override void Exit()
@@ -31,16 +32,17 @@ public class PlayerIdleOnWallState : PlayerOnWallState
     {
         base.LogicUpdate();
 
+        HoldPosition();
+
         if (!isExitingState)
         {
-
-
             jumpInput = player.InputController.JumpInput;
 
             if (jumpInput)
             {
                 stateMachine.ChangeState(player.WallJumpState);
             }
+
 
         }
 

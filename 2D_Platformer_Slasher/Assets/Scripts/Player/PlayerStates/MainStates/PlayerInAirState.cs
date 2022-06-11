@@ -6,7 +6,7 @@ public class PlayerInAirState : PlayerState
 {
 
     private int xInput;
-    protected bool dobleJumpInput;
+    protected bool JumpInput;
     private bool isGrounded;
     private bool isFall;
     private bool isTouchingGrabWall;
@@ -25,6 +25,8 @@ public class PlayerInAirState : PlayerState
         player.JumpState.DecreaseAmountOfJumpsLeft();
         player.SetColliderHeight(data.standColiderHeight);
         player.SetGravityOn();
+        player.SetPhysicsMaterial(data.noFrictionMaterial);
+
     }
 
     public override void DoChecks()
@@ -46,7 +48,7 @@ public class PlayerInAirState : PlayerState
     {
         base.LogicUpdate();
 
-        dobleJumpInput = player.InputController.JumpInput;
+        JumpInput = player.InputController.JumpInput;
         xInput = player.InputController.NormInputX;
 
         
@@ -54,14 +56,15 @@ public class PlayerInAirState : PlayerState
         {
             stateMachine.ChangeState(player.LandingOnWallState);
         }
-        else if(dobleJumpInput && player.JumpState.CanJump())
-        {
 
+        else if(JumpInput && player.JumpState.CanJump())
+        {
             stateMachine.ChangeState(player.JumpState);
         }
         
         else if (isGrounded && isFall)
         {
+
             if (fallingSpeed <= data.thresholdHardLanding)
             {
                 stateMachine.ChangeState(player.HardLanding);
@@ -82,7 +85,6 @@ public class PlayerInAirState : PlayerState
 
     private void SetAnimation()
     {
-        Debug.Log(player.JumpState.AmountOfJumpsLeft);
         player.Animator.SetFloat("yVelocity", player.CurrentMotion.y);
         player.Animator.SetInteger("amountJump", player.JumpState.AmountOfJumpsLeft);
     }

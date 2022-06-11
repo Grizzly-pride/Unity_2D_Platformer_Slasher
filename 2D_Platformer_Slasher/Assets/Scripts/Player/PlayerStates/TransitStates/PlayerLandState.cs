@@ -11,7 +11,8 @@ public class PlayerLandState : PlayerGroundedState
     public override void Enter()
     {
         base.Enter();
-        player.SetGravityOff();
+        player.JumpState.ResetAmountOfJumpsLeft();
+        player.SetPhysicsMaterial(data.frictionMaterial);
         player.SetVelocityZero();
     }
 

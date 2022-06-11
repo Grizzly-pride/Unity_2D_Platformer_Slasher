@@ -43,14 +43,13 @@ public class PlayerState
 
     public virtual void LogicUpdate()
     {
-        DoChecks();
+        //DoChecks();
     }
-
 
  
     public virtual void PhysicsUpdate()
     {
-        //DoChecks();
+        DoChecks();
     }
 
     public virtual void DoChecks() { }

@@ -12,7 +12,7 @@ public class PlayerStandUpState : PlayerGroundedState
     {
         base.Enter();
         player.InputController.UseStandUpInput();
-        player.SetGravityOff();
+        player.SetPhysicsMaterial(data.frictionMaterial);
         player.SetVelocityZero();
     }
 

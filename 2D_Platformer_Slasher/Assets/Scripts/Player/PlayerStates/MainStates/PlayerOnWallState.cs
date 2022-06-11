@@ -13,8 +13,8 @@ public class PlayerOnWallState : PlayerState
     private Vector2 holdPosition;
     private Vector2 detectPointHit;
 
-    private float Xpos;
-    private float Ypos;
+    private float posX;
+    private float posY;
     private float defaultContactOffset;
 
 
@@ -27,15 +27,15 @@ public class PlayerOnWallState : PlayerState
 
     public override void Enter()
     {
-        base.Enter();
-        detectPointHit = player.WallSensor.pointHit1;
+        base.Enter();       
+
+        detectPointHit = player.WallSensor.pointHit;
 
         defaultContactOffset = Physics2D.defaultContactOffset;
 
-        Xpos = detectPointHit.x - (player.BodyCollider.size.x / 2 + defaultContactOffset) * player.FacingDirection;
-        Ypos = detectPointHit.y - player.WallSensor.hitPosition1.y;
+        posX = detectPointHit.x - (player.BodyCollider.size.x / 2 + defaultContactOffset) * player.FacingDirection;
+        posY = detectPointHit.y - player.WallSensor.startHitUp;
 
-        HoldPosition();
     }
 
     public override void Exit()
@@ -47,8 +47,7 @@ public class PlayerOnWallState : PlayerState
     {
         base.LogicUpdate();
 
-        HoldPosition();
-
+        SetAnimation();
     }
 
     public override void PhysicsUpdate()
@@ -56,9 +55,16 @@ public class PlayerOnWallState : PlayerState
         base.PhysicsUpdate();
     }
 
-    private void HoldPosition()
+    private void SetAnimation()
     {
-        holdPosition = new Vector2(Xpos, Ypos); 
+
+        player.Animator.SetInteger("amountJump", player.JumpState.AmountOfJumpsLeft);
+    }
+
+
+    protected void HoldPosition()
+    {
+        holdPosition = new Vector2(posX, posY); 
         player.transform.position = holdPosition;
     }
 

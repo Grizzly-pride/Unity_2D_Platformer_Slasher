@@ -18,7 +18,8 @@ public class PlayerLandingOnWallState : PlayerOnWallState
     public override void Enter()
     {
         base.Enter();
-
+        player.JumpState.ResetAmountOfJumpsLeft();
+        HoldPosition();
     }
 
     public override void Exit()
@@ -29,6 +30,8 @@ public class PlayerLandingOnWallState : PlayerOnWallState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
+
+        HoldPosition();
 
         if (isAnimationFinished)
         {

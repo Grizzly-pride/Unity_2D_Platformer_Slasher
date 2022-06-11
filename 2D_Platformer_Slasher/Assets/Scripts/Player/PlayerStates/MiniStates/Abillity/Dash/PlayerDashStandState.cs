@@ -19,6 +19,7 @@ public class PlayerDashStandState : PlayerDashState
     public override void Enter()
     {
         base.Enter();
+        player.SetPhysicsMaterial(data.noFrictionMaterial);
 
     }
 
@@ -35,10 +36,11 @@ public class PlayerDashStandState : PlayerDashState
             }
             else if (Time.time <= startTime + data.dashStandTime)
             {
-                player.MovementOnGround(isSlope, data.dashStandSpeed, player.FacingDirection);
+                applyMotion = true;
             }
             else
             {
+                applyMotion = false;    
                 lastDashTime = Time.time;
 
                 if (isRoof)
@@ -53,5 +55,16 @@ public class PlayerDashStandState : PlayerDashState
 
         }
     }
-    
+
+    public override void PhysicsUpdate()
+    {
+        base.PhysicsUpdate();
+
+        if (applyMotion)
+        {
+            player.MovementOnGround(isSlope, data.dashStandSpeed, player.FacingDirection);
+        }
+
+    }
+
 }

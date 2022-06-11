@@ -12,7 +12,7 @@ public class PlayerSitDownState : PlayerGroundedState
     {
         base.Enter();
         player.InputController.UseSitDownInput();
-        player.SetGravityOff();
+        player.SetPhysicsMaterial(data.frictionMaterial);
         player.SetVelocityZero();
     }
 

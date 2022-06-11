@@ -11,6 +11,7 @@ public class PlayerStandIdleState : PlayerStandState
     {
         base.Enter();
 
+        player.SetPhysicsMaterial(data.frictionMaterial);
         player.SetVelocityZero();
 
     }

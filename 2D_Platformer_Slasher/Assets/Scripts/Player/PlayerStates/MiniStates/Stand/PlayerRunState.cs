@@ -12,6 +12,7 @@ public class PlayerRunState : PlayerStandState
     public override void Enter()
     {
         base.Enter();
+        player.SetPhysicsMaterial(data.noFrictionMaterial);
 
     }
 
@@ -21,19 +22,24 @@ public class PlayerRunState : PlayerStandState
 
         if (!isExitingState)
         {
-            player.MovementOnGround(isSlope, data.runSpeed, xInput);
             player.CheckIfShouldFlip(xInput);
-
 
             if (xInput == 0)
             {
                 stateMachine.ChangeState(player.RunStopState);
             }
+        }
+    }
 
+    public override void PhysicsUpdate()
+    {
+        base.PhysicsUpdate();
 
+        if (!isExitingState)
+        {
+            player.MovementOnGround(isSlope, data.runSpeed, xInput);
         }
 
     }
-
 
 }

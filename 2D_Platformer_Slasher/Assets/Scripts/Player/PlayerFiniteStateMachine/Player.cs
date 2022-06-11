@@ -33,9 +33,9 @@ public class Player : MonoBehaviour
     public PlayerInputController InputController { get; private set; }
     public Rigidbody2D RB { get; private set; }
     public BoxCollider2D BodyCollider { get; private set; }
-    public SensorSurface GroundSensor { get; private set; }
-    public SensorCollision RoofSensor { get; private set; }
-    public SensorCollision WallSensor { get; private set; } 
+    public SensorGround GroundSensor { get; private set; }
+    public SensorRoof RoofSensor { get; private set; }
+    public SensorWall WallSensor { get; private set; } 
     #endregion
 
     #region Variables
@@ -80,13 +80,12 @@ public class Player : MonoBehaviour
 
         InAirState = new PlayerInAirState(this, StateMachine, data, "inAir");
         JumpState = new PlayerJumpState(this, StateMachine, data, "inAir");
-
-        //WallJumpState = new PlayerWallJumpState(this, StateMachine, data, "jump");  
+        WallJumpState = new PlayerWallJumpState(this, StateMachine, data, "inAir");  
 
         //Sensors
-        GroundSensor = transform.Find("GroundCheck").GetComponent<SensorSurface>();
-        RoofSensor = transform.Find("RoofCheck").GetComponent<SensorCollision>();
-        WallSensor = transform.Find("WallCheck").GetComponent<SensorCollision>();
+        GroundSensor = transform.Find("GroundCheck").GetComponent<SensorGround>();
+        RoofSensor = transform.Find("RoofCheck").GetComponent<SensorRoof>();
+        WallSensor = transform.Find("WallCheck").GetComponent<SensorWall>();
 
         //Components
         Animator = GetComponent<Animator>();
@@ -99,8 +98,6 @@ public class Player : MonoBehaviour
     {
         GroundSensor.detected = false;
         GroundSensor.isOnSlope = false;
-        RoofSensor.detected = false;
-        WallSensor.detected = false;    
         FacingDirection = 1;
         wasCrouch = false;
 
@@ -216,33 +213,33 @@ public class Player : MonoBehaviour
     #region Check Functions
     public bool CheckIfGrounded()
     {
-        GroundSensor.CheckSurface(FacingDirection);
+        GroundSensor.Checking();
         return GroundSensor.detected;
     }
 
     public bool CheckIfRoof()
     {
-        RoofSensor.CheckCollision();
+        RoofSensor.Checking();
         return RoofSensor.detected;
     }
 
     public bool CheckIfWall()
     {
-        WallSensor.CheckCollision(FacingDirection);
+        WallSensor.Checking(FacingDirection);
         return WallSensor.detected;
     }
 
     
     public bool CheckIfSlope()
     {
-        GroundSensor.CheckSurface(FacingDirection);
+        GroundSensor.Checking();
         return GroundSensor.isOnSlope;
     }
 
 
-    public void CheckIfShouldFlip(int xInput)
+    public void CheckIfShouldFlip(int xDirect)
     {
-        if (xInput != 0 && xInput != FacingDirection)
+        if (xDirect != 0 && xDirect != FacingDirection)
         {
             SetFlip();
         }
