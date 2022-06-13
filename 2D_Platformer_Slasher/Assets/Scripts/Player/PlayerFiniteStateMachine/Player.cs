@@ -26,6 +26,7 @@ public class Player : MonoBehaviour
     public PlayerLandingOnWallState LandingOnWallState { get; private set; }
     public PlayerInAirState InAirState { get; private set; }
     public PlayerWallJumpState WallJumpState { get; private set; } 
+    public PlayerOnLedgeState OnLedgeState { get; private set; }
     #endregion
 
     #region Components
@@ -36,6 +37,7 @@ public class Player : MonoBehaviour
     public SensorGround GroundSensor { get; private set; }
     public SensorRoof RoofSensor { get; private set; }
     public SensorWall WallSensor { get; private set; } 
+    public SensorLedge LedgeSensor { get; private set; }
     #endregion
 
     #region Variables
@@ -78,14 +80,17 @@ public class Player : MonoBehaviour
         IdleOnWallState = new PlayerIdleOnWallState(this, StateMachine, data, "idleOnWall");
         LandingOnWallState = new PlayerLandingOnWallState(this, StateMachine, data, "landingOnWall");
 
-        InAirState = new PlayerInAirState(this, StateMachine, data, "inAir");
-        JumpState = new PlayerJumpState(this, StateMachine, data, "inAir");
-        WallJumpState = new PlayerWallJumpState(this, StateMachine, data, "inAir");  
+        InAirState = new PlayerInAirState(this, StateMachine, data, "inAirState");
+        JumpState = new PlayerJumpState(this, StateMachine, data, "inAirState");
+        WallJumpState = new PlayerWallJumpState(this, StateMachine, data, "inAirState");
+
+        OnLedgeState = new PlayerOnLedgeState(this, StateMachine, data, "onLedgeState");
 
         //Sensors
         GroundSensor = transform.Find("GroundCheck").GetComponent<SensorGround>();
         RoofSensor = transform.Find("RoofCheck").GetComponent<SensorRoof>();
         WallSensor = transform.Find("WallCheck").GetComponent<SensorWall>();
+        LedgeSensor = transform.Find("LedgeCheck").GetComponent<SensorLedge>();
 
         //Components
         Animator = GetComponent<Animator>();
@@ -229,7 +234,23 @@ public class Player : MonoBehaviour
         return WallSensor.detected;
     }
 
-    
+    public Vector2 GetWallDetectPoint()
+    {
+        return WallSensor.pointHit;
+    }
+
+    public bool CheckIfLedge()
+    {
+        LedgeSensor.Checking(FacingDirection);
+        return LedgeSensor.detected;
+    }
+
+    public Vector2 GetLedgePointAngle()
+    {
+        return LedgeSensor.pointAngle;
+    }
+
+
     public bool CheckIfSlope()
     {
         GroundSensor.Checking();

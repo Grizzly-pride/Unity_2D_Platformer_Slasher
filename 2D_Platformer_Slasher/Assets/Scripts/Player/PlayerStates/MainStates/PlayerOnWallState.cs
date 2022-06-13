@@ -17,6 +17,17 @@ public class PlayerOnWallState : PlayerState
     private float posY;
     private float defaultContactOffset;
 
+    public override void Enter()
+    {
+        base.Enter();
+
+        detectPointHit = player.GetWallDetectPoint();
+        defaultContactOffset = Physics2D.defaultContactOffset;
+
+        posX = detectPointHit.x - (player.BodyCollider.size.x / 2 + defaultContactOffset) * player.FacingDirection;
+        posY = detectPointHit.y - player.WallSensor.startHitUp;
+
+    }
 
     public override void DoChecks()
     {
@@ -25,18 +36,6 @@ public class PlayerOnWallState : PlayerState
 
     }
 
-    public override void Enter()
-    {
-        base.Enter();       
-
-        detectPointHit = player.WallSensor.pointHit;
-
-        defaultContactOffset = Physics2D.defaultContactOffset;
-
-        posX = detectPointHit.x - (player.BodyCollider.size.x / 2 + defaultContactOffset) * player.FacingDirection;
-        posY = detectPointHit.y - player.WallSensor.startHitUp;
-
-    }
 
     public override void Exit()
     {

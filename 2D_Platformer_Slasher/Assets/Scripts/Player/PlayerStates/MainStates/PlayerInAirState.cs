@@ -10,6 +10,7 @@ public class PlayerInAirState : PlayerState
     private bool isGrounded;
     private bool isFall;
     private bool isTouchingGrabWall;
+    private bool isTouchingLedge;
     private float fallingSpeed;
 
     public PlayerInAirState(Player player, PlayerStateMachine stateMachine, PlayerData data, string animName) : base(player, stateMachine, data, animName)  
@@ -34,8 +35,11 @@ public class PlayerInAirState : PlayerState
         base.DoChecks();
         isGrounded = player.CheckIfGrounded();
         isTouchingGrabWall = player.CheckIfWall();
+        isTouchingLedge = player.CheckIfLedge();
         CheckFallingSpeed();
         ChechIfFall();
+
+        
     }
 
     public override void Exit()
@@ -56,12 +60,10 @@ public class PlayerInAirState : PlayerState
         {
             stateMachine.ChangeState(player.LandingOnWallState);
         }
-
         else if(JumpInput && player.JumpState.CanJump())
         {
             stateMachine.ChangeState(player.JumpState);
-        }
-        
+        }       
         else if (isGrounded && isFall)
         {
 
@@ -104,5 +106,7 @@ public class PlayerInAirState : PlayerState
             fallingSpeed = player.CurrentMotion.y;
         }
     }
+
+ 
 }
 

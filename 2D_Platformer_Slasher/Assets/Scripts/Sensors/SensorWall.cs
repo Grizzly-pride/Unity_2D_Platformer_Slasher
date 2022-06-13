@@ -37,12 +37,13 @@ public class SensorWall : MonoBehaviour
             if(hitUpRight && hitDownRight)
             {
                 detected = true;
-
+                rightSide = true;
                 pointHit = hitUpRight.point;
- 
             }
             else
             {
+                rightSide = false;
+                leftSide = false;
                 detected = false;
             }
 
@@ -52,39 +53,19 @@ public class SensorWall : MonoBehaviour
             if (hitUpLeft && hitDownLeft)
             {
                 detected = true;
-
+                leftSide = true;
                 pointHit = hitUpLeft.point;
-
             }
             else
             {
+                rightSide = false;
+                leftSide = false;
                 detected = false;
             }
 
         }
 
 
-        /*
-        if (hitUpRight && hitDownRight || hitUpLeft && hitDownLeft)
-        {
-            detected = true;
-
-            if (hitUpRight)
-            {
-                pointHit = hitUpRight.point;
-             
-            }
-            else if (hitUpLeft)
-            {
-                pointHit = hitUpLeft.point;
-            }
-        }
-        else
-        {
-
-            detected = false;
-        }
-        */
     }
 
     private void OnDrawGizmos()

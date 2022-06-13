@@ -14,6 +14,7 @@ public class PlayerGroundedState : PlayerState
     //Check
     protected bool isSlope;
     private bool isGrounded;
+    private bool isTouchingLedge;
 
     public PlayerGroundedState(Player player, PlayerStateMachine stateMachine, PlayerData data, string animName) : base(player, stateMachine, data, animName)
     {
@@ -32,6 +33,8 @@ public class PlayerGroundedState : PlayerState
 
         isGrounded = player.CheckIfGrounded();
         isSlope = player.CheckIfSlope();
+        isTouchingLedge = player.CheckIfLedge();
+
         HoldOnSlope();
  
     }
