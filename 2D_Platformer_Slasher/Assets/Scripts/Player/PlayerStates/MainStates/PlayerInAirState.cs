@@ -27,7 +27,6 @@ public class PlayerInAirState : PlayerState
         player.SetColliderHeight(data.standColiderHeight);
         player.SetGravityOn();
         player.SetPhysicsMaterial(data.noFrictionMaterial);
-
     }
 
     public override void DoChecks()
@@ -39,6 +38,10 @@ public class PlayerInAirState : PlayerState
         CheckFallingSpeed();
         ChechIfFall();
 
+        if (isTouchingLedge && isFall)
+        {
+            player.OnLedgeState.SetAnglePosition(player.GetLedgePointAngle());
+        }       
         
     }
 
@@ -59,6 +62,10 @@ public class PlayerInAirState : PlayerState
         if (isTouchingGrabWall && isFall)
         {
             stateMachine.ChangeState(player.LandingOnWallState);
+        }
+        else if(isTouchingLedge && isFall)
+        {
+            stateMachine.ChangeState(player.OnLedgeState);
         }
         else if(JumpInput && player.JumpState.CanJump())
         {

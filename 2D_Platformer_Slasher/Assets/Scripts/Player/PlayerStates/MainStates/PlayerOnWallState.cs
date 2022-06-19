@@ -8,39 +8,28 @@ public class PlayerOnWallState : PlayerState
     {
     }
 
-    protected bool isTouchingGrabWall;
-
     private Vector2 holdPosition;
     private Vector2 detectPointHit;
-
     private float posX;
     private float posY;
     private float defaultContactOffset;
+
 
     public override void Enter()
     {
         base.Enter();
 
+        player.WallJumpState.DetermineWallJumpDerection(player.CheckIfWall());
+
+        player.SetVelocityZero();
+
         detectPointHit = player.GetWallDetectPoint();
         defaultContactOffset = Physics2D.defaultContactOffset;
-
         posX = detectPointHit.x - (player.BodyCollider.size.x / 2 + defaultContactOffset) * player.FacingDirection;
         posY = detectPointHit.y - player.WallSensor.startHitUp;
 
     }
 
-    public override void DoChecks()
-    {
-        base.DoChecks();
-        isTouchingGrabWall = player.CheckIfWall();
-
-    }
-
-
-    public override void Exit()
-    {
-        base.Exit();
-    }
 
     public override void LogicUpdate()
     {
@@ -49,24 +38,17 @@ public class PlayerOnWallState : PlayerState
         SetAnimation();
     }
 
-    public override void PhysicsUpdate()
-    {
-        base.PhysicsUpdate();
-    }
+
 
     private void SetAnimation()
     {
-
         player.Animator.SetInteger("amountJump", player.JumpState.AmountOfJumpsLeft);
     }
 
-
     protected void HoldPosition()
     {
-        holdPosition = new Vector2(posX, posY); 
+        holdPosition.Set(posX, posY);
         player.transform.position = holdPosition;
     }
-
-
 
 }

@@ -17,7 +17,7 @@ MonoBehaviour:
   runSpeed: 6
   walckSpeed: 2
   runningThreshold: 0.8
-  standColiderHeight: 1.38
+  standColiderHeight: 1.37
   crouchSpeed: 2
   crouchColiderHeight: 0.84
   amountOfJumps: 2

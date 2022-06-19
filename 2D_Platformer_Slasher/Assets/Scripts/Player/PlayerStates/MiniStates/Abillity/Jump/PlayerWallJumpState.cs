@@ -19,7 +19,6 @@ public class PlayerWallJumpState : PlayerAbilityState
     {
         base.Enter();
 
-        DetermineWallJumpDerection(player.CheckIfWall());
         player.CheckIfShouldFlip(wallJumpDirection);
         player.SetVelocity(data.wallJumpForce, data.wallJumpAngle, wallJumpDirection);
     }
@@ -42,7 +41,6 @@ public class PlayerWallJumpState : PlayerAbilityState
         }
         
     }
-
 
 
     public void DetermineWallJumpDerection(bool isTouchingWall)

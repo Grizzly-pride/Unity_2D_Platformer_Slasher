@@ -25,8 +25,14 @@ public class Player : MonoBehaviour
     public PlayerIdleOnWallState IdleOnWallState { get; private set; }  
     public PlayerLandingOnWallState LandingOnWallState { get; private set; }
     public PlayerInAirState InAirState { get; private set; }
+    public PlayerOnWallState OnWallState { get; private set; }
     public PlayerWallJumpState WallJumpState { get; private set; } 
     public PlayerOnLedgeState OnLedgeState { get; private set; }
+    /*
+    public PlayerLedgeGrabState LedgeGrabState { get; private set;}
+    public PlayerLedgeHoldState LedgeHoldState { get; private set;}
+    public PlayerLedgeClimbState LedgeClimbState { get; private set;}
+    */
     #endregion
 
     #region Components
@@ -85,6 +91,13 @@ public class Player : MonoBehaviour
         WallJumpState = new PlayerWallJumpState(this, StateMachine, data, "inAirState");
 
         OnLedgeState = new PlayerOnLedgeState(this, StateMachine, data, "onLedgeState");
+
+        /*
+        LedgeGrabState = new PlayerLedgeGrabState(this, StateMachine, data, "ledgeGrab");
+        LedgeClimbState = new PlayerLedgeClimbState(this, StateMachine, data, "ledgeClimb");
+        LedgeHoldState = new PlayerLedgeHoldState(this, StateMachine, data, "ledgeHold");
+        */
+
 
         //Sensors
         GroundSensor = transform.Find("GroundCheck").GetComponent<SensorGround>();

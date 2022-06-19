@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerLandingOnWallState : PlayerOnWallState
+public class PlayerLedgeGrabState : PlayerOnLedgeState
 {
-    public PlayerLandingOnWallState(Player player, PlayerStateMachine stateMachine, PlayerData data, string animName) : base(player, stateMachine, data, animName)
+    public PlayerLedgeGrabState(Player player, PlayerStateMachine stateMachine, PlayerData data, string animName) : base(player, stateMachine, data, animName)
     {
     }
 
@@ -12,15 +12,12 @@ public class PlayerLandingOnWallState : PlayerOnWallState
     public override void DoChecks()
     {
         base.DoChecks();
-
     }
 
     public override void Enter()
     {
         base.Enter();
-
         player.JumpState.ResetAmountOfJumpsLeft();
-
         HoldPosition();
     }
 
@@ -34,12 +31,11 @@ public class PlayerLandingOnWallState : PlayerOnWallState
         base.LogicUpdate();
 
         HoldPosition();
-
+        /*
         if (isAnimationFinished)
         {
-            stateMachine.ChangeState(player.IdleOnWallState);
+            stateMachine.ChangeState(player.LedgeHoldState);
         }
-
+        */
     }
-
 }
