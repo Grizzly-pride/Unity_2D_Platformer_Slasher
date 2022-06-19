@@ -10,12 +10,12 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - No Collisions
   - Water
   - UI
   - Player
   - 'Ground '
-  - Grab_Wall
+  - Grab Wall
   - 
   - 
   - 
@@ -46,7 +46,7 @@ TagManager:
   - name: Ground
     uniqueID: 646239603
     locked: 0
-  - name: Grab_Wall
+  - name: Grab Wall
     uniqueID: 2378649087
     locked: 0
   - name: Player
